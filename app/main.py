@@ -17,7 +17,7 @@ from .routers import user, post, auth, vote
 from fastapi.middleware.cors import CORSMiddleware
 # from . import models
 # from .database import engine
-# from .config import settings
+from .config import settings
 
 # models.Base.metadata.create_all(bind=engine)
 
