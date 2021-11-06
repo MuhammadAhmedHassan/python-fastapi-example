@@ -11,6 +11,7 @@ class Settings(BaseSettings):
   algorithm : str
   access_token_expire_minutes : int
   DATABASE_URL: str
+  db_url: str
   ALEMBIC_DATABASE_URL: str
   class Config:
     env_file = ".env"
