@@ -5,7 +5,8 @@ from sqlalchemy import func
 from sqlalchemy.orm.session import Session
 from sqlalchemy.sql.functions import current_user
 from ..database import get_db
-from .. import schemas, models, main, oauth2
+from .. import schemas, models, main, oauth2, config
+from app import database
 
 router = APIRouter(
   prefix="/posts",
@@ -41,12 +42,12 @@ def create_post(post: schemas.PostCreate, db: Session = Depends(get_db), current
 
 # Get latest post
 # This handler should come first then the last one
-# @router.get('/latest', response_model=schemas.Post)
-# def get_latest_post():
-#   main.cursor.execute("""SELECT * FROM posts ORDER BY created_at DESC LIMIT 1""")
-#   latest_post = main.cursor.fetchone()
-#   print("LATEST_POST", latest_post)
-#   return latest_post
+@router.get('/latest')
+def get_latest_post():
+  database.cursor.execute("""SELECT * FROM posts ORDER BY created_at DESC LIMIT 1""")
+  latest_post = database.cursor.fetchone()
+  print("LATEST_POST", latest_post)
+  return latest_post
 
 
 # Get post by id
